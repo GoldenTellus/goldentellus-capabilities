@@ -1,0 +1,66 @@
+{
+  "schema": "snao.knowledge-pack.entries/1",
+  "pack_id": "snao-community-2026-11",
+  "entries": [
+    {
+      "entry_id": "sha256:451fe5e777702be21c097e4910047f4c",
+      "category": "capabilities",
+      "payload": {
+        "question": "model-profile-default",
+        "answer": "model_profile · v1.0.0"
+      },
+      "tags": [],
+      "confidence": 100,
+      "source": "capability_catalog",
+      "k": null
+    },
+    {
+      "entry_id": "sha256:69c9b9057e28199bacfaf11dc2b84648",
+      "category": "capabilities",
+      "payload": {
+        "question": "skill-doc-summary",
+        "answer": "skill · v1.0.0"
+      },
+      "tags": [],
+      "confidence": 100,
+      "source": "capability_catalog",
+      "k": null
+    },
+    {
+      "entry_id": "sha256:7198fcd44c944db048bcfbf599378adf",
+      "category": "capabilities",
+      "payload": {
+        "question": "tool-salesforce",
+        "answer": "tool · v1.0.0"
+      },
+      "tags": [],
+      "confidence": 100,
+      "source": "capability_catalog",
+      "k": null
+    },
+    {
+      "entry_id": "sha256:86a21d966b031da4562e3f0a9bf7ca82",
+      "category": "capabilities",
+      "payload": {
+        "question": "knowledge-pack-core",
+        "answer": "knowledge_pack · v2026.11.0"
+      },
+      "tags": [],
+      "confidence": 100,
+      "source": "capability_catalog",
+      "k": null
+    },
+    {
+      "entry_id": "sha256:82bfe31ee8777a47db017a3fbc191dad",
+      "category": "faq",
+      "payload": {
+        "question": "你都可以干什么",
+        "answer": "结论：我可以做两类事——“查”，以及“把活接下来或交出去”。 **能直接做** - 查企业知识：制度、流程、客户资料、历史文档。检索时会按你的权限范围来过滤，查不到我就告诉你不知道，不会猜。 - 帮你读、写、改文件，整理成表格或一页纸材料，也能代你运行脚本、查代码或做分析。 - 产出文件可以写进本轮输出目录，方便你直接拿走。 **做不了时** - 需要人拍板、需要授权才能看的资料，我会建工单转给人，并告诉你缺哪份、任务号是多少。 - 涉及删除、改权限、对外发送这类不可逆动作，我会先问你。 你可以直接说需求，比如“把上周新品发布的进展整理成一页表”，或者“XX 客户的合同条款是怎么规定的”。"
+      },
+      "tags": [],
+      "confidence": 80,
+      "source": "faq_candidate",
+      "k": 1
+    }
+  ]
+}
