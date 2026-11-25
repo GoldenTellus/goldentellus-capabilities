@@ -23,6 +23,32 @@ Thank you for considering contributing! This repository is a catalog of producti
 - Capabilities that only work with a single proprietary platform (unless it's very widely adopted)
 - Anything that requires a complex setup or deep knowledge of SNAO internals
 
+## Knowledge Packs
+
+Knowledge packs under `knowledge/<pack-id>/` follow a different path from code
+capabilities. They are produced by the SNAO contribution pipeline:
+
+1. A deployment desensitizes selected entries and submits them to the vendor
+   relay.
+2. The vendor rejects leaking batches, dedupes by `entry_id` and applies
+   k-anonymity (at least two independent deployments per non-capability entry,
+   unless the pack is explicitly `single_source`).
+3. An `inbox/<pack-id>` branch opens a PR with the four pack files.
+4. After merge, the vendor signs a bundle and publishes it as a release.
+
+Do not hand-write or hand-edit a pack PR. Propose the need in an issue instead;
+never paste raw customer content into an issue, PR or pack.
+
+Before pushing any pack change, run:
+
+```bash
+node scripts/validate-pack.mjs
+```
+
+The same validator runs in CI and rejects leaks, schema drift, duplicate ids and
+k-anonymity violations. See [KNOWLEDGE_PACK_FORMAT.md](KNOWLEDGE_PACK_FORMAT.md)
+and [SIGNING.md](SIGNING.md).
+
 ## Contribution Process
 
 ### 1. Propose First
