@@ -26,23 +26,48 @@ Each capability is packaged in **universal formats** so you can use them immedia
 
 **You don't need SNAO to use these.** Pick the format that fits your stack.
 
+## Knowledge Packs
+
+Some reusable knowledge is shared as **desensitized knowledge packs** instead of
+code: question/answer pairs, FAQs, review rules, glossaries and capability
+catalog entries collected from SNAO deployments.
+
+- No raw conversations, names, ids, amounts, hosts or file names.
+- Every entry is deduped across deployments and reviewed before merge.
+- Packs with `k >= 2` come from at least two independent deployments; a
+  `single_source` pack is explicitly marked.
+- Published packs are **signed**; installers verify the signature and every file
+  hash before use.
+
+`knowledge/<pack-id>/` holds the four pack files. Packs are distributed as
+release assets named `<pack-id>-v<version>.bundle.json`; see
+[KNOWLEDGE_PACK_FORMAT.md](KNOWLEDGE_PACK_FORMAT.md) and [SIGNING.md](SIGNING.md).
+
 ## Repository Structure
 
 ```
-capabilities/
-├── tools/           # External API connectors
+.
+├── tools/                 # External API connectors
 │   └── example-crm/
-│       ├── mcp/              # MCP server implementation
-│       ├── openapi/          # OpenAPI 3.1 spec
-│       ├── standalone/       # CLI script version
+│       ├── mcp/           # MCP server implementation
+│       ├── openapi/       # OpenAPI 3.1 spec
+│       ├── standalone/    # CLI script version
 │       └── README.md
-├── skills/          # Task orchestration with prompts + RAG
+├── skills/                # Task orchestration with prompts + RAG
 │   └── doc-summary/
-│       ├── claude-skill/     # Claude Skill package
-│       ├── standalone/       # Script version
+│       ├── claude-skill/  # Claude Skill package
+│       ├── standalone/    # Script version
 │       └── README.md
-├── knowledge/       # Domain knowledge packs
-└── external-roles/  # Customer-facing bot configurations
+├── knowledge/             # Desensitized knowledge packs
+│   └── <pack-id>/
+│       ├── README.md
+│       ├── LICENSE        # CC-BY-4.0 by default
+│       ├── manifest.yaml
+│       └── entries.json
+├── external-roles/        # Customer-facing bot configurations
+├── keys/network.pub       # Pinned Ed25519 key for signed packs
+├── scripts/validate-pack.mjs
+└── .github/workflows/     # CI: validates every knowledge pack
 ```
 
 ## Quick Start
@@ -82,6 +107,14 @@ We're actively adding capabilities from our SNAO deployments. To contribute:
 2. Include a clear README with usage examples and configuration options
 3. Test it in at least one real deployment before submitting
 
+Knowledge packs are produced by the SNAO contribution pipeline, not written by
+hand: a deployment submits a desensitized pack, the vendor relays, dedupes,
+applies k-anonymity and reviews it, then opens an `inbox/<pack-id>` PR. If you
+want to propose a pack, open an issue first; never paste raw customer content.
+
+Run `node scripts/validate-pack.mjs` locally before pushing. CI runs it on every
+pull request.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Behind the Scenes: SNAO
@@ -96,4 +129,7 @@ Learn more at [goldentellus.com](https://goldentellus.com)
 
 ## License
 
-Each capability is licensed individually (see LICENSE in each directory). Most are MIT or Apache 2.0.
+Each capability is licensed individually (see LICENSE in each directory). Most
+are MIT or Apache 2.0. Knowledge packs default to CC-BY-4.0 and carry their own
+LICENSE file; the pack format and signing process are documented in
+[KNOWLEDGE_PACK_FORMAT.md](KNOWLEDGE_PACK_FORMAT.md) and [SIGNING.md](SIGNING.md).
